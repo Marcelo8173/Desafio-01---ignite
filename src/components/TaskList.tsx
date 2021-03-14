@@ -31,16 +31,11 @@ export function TaskList() {
   }
 
   function handleToggleTaskCompletion(id: number) {
-    const itemToChange = tasks.find(item => item.id === id);
-    const indexOf = tasks.findIndex(item => item.id === id);
-    console.log('a',indexOf)
-    const newData = {
-      id: itemToChange?.id,
-      title: itemToChange?.title,
-      isComplete: !itemToChange?.isComplete 
-    }
-    tasks.splice(indexOf, 1);
-    setTasks([...tasks, newData]);
+    const newTask = tasks.map(item => item.id === id ? {
+      ...item,
+      isComplete: !item.isComplete
+    } : item);
+    setTasks(newTask);
   }
 
   function handleRemoveTask(id: number) {
